@@ -1,14 +1,3 @@
-# Game class - pass the players as parameters
-# changes managed here - lives left
-# has user input
-# has Turn and Question
-# variable stores Turn number
-# method: calculates how many lives the player has left
-# method: figures out who's turn it is - set current player and switch every time
-# method: game loop (where each instance of the loop is the other players turn) - diff to above??
-# method: creates a math question based on equation - could be a separate function - 
-# how to know when game is over?? - needs lives left
-
 class Game
   attr_accessor :turn, :current_player, :player1, :player2
 
@@ -62,7 +51,7 @@ class Game
     if @game_playing == false
       puts "----- GAME OVER -----"
     end
-    
+
     if @current_player.lives == 0
       puts "We're done!"
       @game_playing = false
