@@ -22,7 +22,6 @@ class Game
 
   def start_game
     while @game_playing == true do
-      puts "in the while loop"
       play_round
       whos_turn
     end
@@ -59,6 +58,11 @@ class Game
       @current_player.lives -= 1
     end
 
+    puts "P1: #{@player1.lives}/3 vs P2: #{@player2.lives}/3"
+    if @game_playing == false
+      puts "----- GAME OVER -----"
+    end
+    
     if @current_player.lives == 0
       puts "We're done!"
       @game_playing = false
