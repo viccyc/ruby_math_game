@@ -18,36 +18,52 @@ class Game
     @player2 = Player.new('Player2', 3)
     @current_player = self.player1
     @game_playing = true
-    while @game_playing do
+  end
+
+  def start_game
+    while @game_playing == true do
+      puts "in the while loop"
       play_round
-      puts "----- NEW TURN -----"
+      whos_turn
     end
   end
 
   def whos_turn
     if @current_player == @player1
       @current_player = @player2
+    else 
+      @current_player = @player1
     end
     return @current_player
   end     
 
-  # def lives_left(correct_answer, current_player)
-  #   if correct_answer != true
-  #     @current_player.lives -= 1
-  #   else
-  #     @current_player.lives
-  #   end
-  # end
-
   def generate_question
-    first_number = 0
-    second_number = 0
+    number_array = []
+    first_number = rand(1...12)
+    second_number = rand(1...12)
+    number_array << first_number
+    number_array << second_number
+    puts "#{current_player.name}: What does #{first_number} plus #{second_number} equal?"
+    return number_array
   end
 
   def play_round
+    puts "----- NEW TURN -----"
+    number_array = generate_question
+    answer = Integer(gets.chomp)
+    if answer == number_array[0] + number_array[1]
+      puts "YES! #{current_player.name} you are correct"
+      @game_playing = false
+    else
+      puts "#{current_player.name}  Seriously?  Noo!!!"
+      @current_player.lives -= 1
+    end
 
-    @game_playing = false
+    if @current_player.lives == 0
+      puts "We're done!"
+      @game_playing = false
+    end
+    return 
   end
-
 end
 
